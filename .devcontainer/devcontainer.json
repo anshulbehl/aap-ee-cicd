@@ -1,0 +1,14 @@
+{
+    "name": "RHEL9/UBI9 Ansible Devcontainer",
+    "build": {
+        "dockerfile": "Containerfile",
+        "args": {
+            "RH_USERNAME": "${env:RH_USERNAME}",
+            "RH_PASSWORD": "${env:RH_PASSWORD}"
+        }
+    },
+    "containerEnv": {
+        "RH_USERNAME": "${env:RH_USERNAME}",
+        "RH_PASSWORD": "${env:RH_PASSWORD}"
+    }
+}
