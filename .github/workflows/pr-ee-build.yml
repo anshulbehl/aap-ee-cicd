@@ -20,7 +20,7 @@ jobs:
         fetch-depth: 0
         ref: ${{ github.event.pull_request.head.ref != '' && github.event.pull_request.head.ref || 'master' }}
 
-    - name: Generate matrix  
+    - name: Generate matrix Test
       id: generate-matrix
       run: |
         echo $GITHUB_BASE_REF
