@@ -18,6 +18,14 @@ jobs:
       with:
         fetch-depth: 0  # Fetch full history
 
+    - name: List current directory
+      run: ls -la
+
+    - name: Check specific directory
+      run: |
+        echo "Contents of .github/workflows:"
+        ls -la .github/workflows
+
     - name: Generate matrix  
       id: generate-matrix
       run: |
