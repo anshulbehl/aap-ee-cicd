@@ -35,6 +35,7 @@ jobs:
     - name: Generate matrix  
       id: generate-matrix
       run: |
+        pwd
         echo $GITHUB_BASE_REF
         echo $GITHUB_HEAD_REF
         python -u .github/workflows/generate_matrix.py \
