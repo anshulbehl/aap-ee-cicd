@@ -1,10 +1,10 @@
 name: Devel EE Build
 
 on:
-  pull_request_target:
+  push:
     branches:
-      - master
-    # types: [opened, reopened, synchronize]
+      - devel
+
 
 jobs:
   prepare-matrix:
@@ -17,6 +17,12 @@ jobs:
       uses: actions/checkout@v2
       with:
         fetch-depth: 0  # Fetch full history
+
+      # Step 2: Checkout the devel branch
+    - name: Checkout devel branch
+      run: |
+        git fetch origin devel
+        git checkout devel
 
     - name: List current directory
       run: ls -la
