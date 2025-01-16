@@ -1,0 +1,33 @@
+# Use UBI9 as the base image
+FROM registry.access.redhat.com/ubi9/ubi
+
+# Set environment variables for the container
+ENV LANG en_US.UTF-8
+ENV LC_ALL en_US.UTF-8
+
+# Install basic dependencies
+RUN dnf install -y \
+    python3 \
+    python3-pip \
+    git \
+    sudo \
+    && dnf clean all
+
+# Set up subscription-manager and enable AAP repo using environment variables
+ARG RH_USERNAME
+ARG RH_PASSWORD
+RUN subscription-manager register --username=$RH_USERNAME --password=$RH_PASSWORD && \
+    subscription-manager attach --pool=2c94d5b793e4f1490194705e34b7049a && \
+    sudo subscription-manager repos --enable=ansible-automation-platform-2.5-for-rhel-9-x86_64-rpms
+
+# Install Ansible Builder
+RUN dnf install ansible-builder ansible-core -y && \
+    dnf clean all
+
+# # Configure a user for development
+# RUN useradd -ms /bin/bash vscode && \
+#     echo "vscode ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+# # Switch to the development user
+# USER vscode
+# WORKDIR /workspaces
